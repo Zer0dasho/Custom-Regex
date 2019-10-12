@@ -1,0 +1,68 @@
+# Commands:
+#	/customregex or /cregex
+#		reload (Reload settigs in config.yml)
+#
+# Permissions:
+#   zerodasho.customregex.generic 	     - Generic permission
+#	zerodasho.customregex.generic.reload - Use /customregex reload
+
+replacements:
+
+    # Name of regular expression entry
+    howdy2hello:
+    
+        # Regular expression - if a chat message section matches this regular expression, it's replaced with the replacement message
+        regex: Howdy (.*)!
+        
+        # Replacement message
+        replacement: Hello $1!
+
+        # If true, the chat message is canceled
+        # If silent_replace is also true, the chat message is canceled for everyone EXCEPT the sender
+        cancel_chat: false
+        
+        # If true, the chat message changes for everyone except the sender
+        silent_replace: true
+
+        # If true, sections of '/' commands that match the regular expression are replaced by the replacement message
+        # Note: If true, must_match must be set to false for this to work properly
+        edit_command: true
+        
+        # If true, the entire message must match the regular expression, not just a section
+        must_match: true
+        
+        # Permission - Sender must have this permission for their message to be affected
+        permission: zerodasho.customregex.generic
+        
+        #  EXAMPLE:  
+        # [Donator] Guy: Howdy Guy2!
+        #  Becomes:
+        # [Donator] Guy: Hello Guy2! 
+ 
+commands:
+
+    # Name of Regular Expression
+    broadcast:
+    
+        # Regular expression - if a chat message matches this regular expression, the following commands are run
+        regex: broadcast (.*)
+        
+        # If true, the chat message is canceled
+        cancel_chat: true
+        
+        # Permission - player must have this permission for commands to execute
+        permission: zerodasho.customregex.generic.reload
+        
+        commands:
+        
+              # '/' command to run
+            - command: say $1
+            
+              # If true, the player executes the command
+              # If false, the server does
+              is_player: false
+              
+        #  EXAMPLE:
+        # [Donator] Guy: broadcast Hello everyone!
+        #  Runs command:
+        # [Server] Hello everyone!
